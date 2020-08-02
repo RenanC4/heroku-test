@@ -1,0 +1,100 @@
+
+{
+	"openapi": "3.0.0",
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	},
+	"info": {
+		"title": "API das atividades relacionadas ao tutor.",
+		"description": "Retorna os as atividades relacionadas ao tutor e shortname informados, shortname é opcional.",
+		"contact": {
+			"email": "miraculous@kroton.onmicrosoft.com"
+		},
+		"version": "1"
+	},
+	"servers": [
+		{
+		  "url": "/"
+		},
+		{
+		  "url": "/usuario/activities/v1"
+		}
+  ],
+  "paths": {
+    "/activities": {
+
+		"get": {
+      "security": [{
+        "bearerAuth": []
+      }],
+		  "tags": [
+			"Retorna as atividades do tutor e shortname informados"
+		  ],
+		  "summary": "",
+		  "description": "",
+		  "parameters": [
+			{
+			  "name": "shortname",
+			  "in": "query",
+			  "description": "",
+			  "required": false,
+			  "style": "simple",
+			  "explode": false,
+			  "schema": {
+				"type": "string",
+				"example": "EAD_REG_PTI"
+			  }
+      },
+  {
+      "name": "type",
+      "in": "query",
+      "description": "",
+      "required": true,
+      "style": "simple",
+      "explode": false,
+      "schema": {
+      "type": "string",
+      "example": "QUIZ"
+      }
+    }
+    ],
+		  "responses": {
+			"200": {
+			  "description": "Retorna as atividades encontradas",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"type": "object",
+					"properties": {},
+					"example" : {
+  "EAD_REG_PTI": [
+    {
+      "origem": "EAD",
+      "shortname_grupo": "GRUPO_tutor_ead_3785_1",
+      "sequencia": "0",
+      "dataInicio": 1588095867,
+      "dataFim": 1588095867,
+      "tipo": "QUIZ"
+    }
+  ]
+}
+        }
+			  }}
+			},
+			"204":{
+			  "description": "usuario nao possui atividades"
+			},
+			"500": {
+			  "description": "Erro interno"
+			}
+		  }
+		}
+	}
+  }
+}
